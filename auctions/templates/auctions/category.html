@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<div class="container d-flex mt-4  p-4">
+    <div class="row">
+        {% for item in obs %}
+        {% if item.active == True %}
+        <div class="col-12 col-sm-12 col-md-6  col-lg-3">
+            <div class="card  mh-100 mt-3 "
+                style="width: 100%; min-width: 18rem; height: 70vh;padding: 5px; overflow: hidden; margin-left: 10px;">
+                <div style="height: 65%;" class="p-3"><img class="card-img-top "
+                        style="max-width: 100%; max-height: 100%;" src="{{ item.photo }}" alt="{{item.name}}"></div>
+                <a href="{% url 'listing' id=item.id %}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <p style="display: inline-block; height: 7vh; overflow: hidden;" class="card-text">
+                            {{item.description}}</p>
+                        <p class="card-text">{{item.date}} </p>
+                    </div>
+
+                </a>
+
+            </div>
+        </div>
+
+
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<div class="container">
+    
+
+
+
+
+
+<form action="{% url 'addListing' %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-6 mt-3 ml-3">
+            <div class="card" style="height: 7rem;">
+                <div class="card-body">
+                    <div class="form-group ">
+                        <label for="name">Name: </label>
+                        <input type="text" maxlength="50" class="form-control mt-3" name="name" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col-12 col-md-12 col-lg-6 mt-3 ml-3">
+          <div class="card " style="height: 7rem;">
+            <div class="card-body">
+                <div class="form-group ">
+                    <label for="price">Price :</label>
+                    <input type="number" class="form-control mt-3" name="price">
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-6 mt-3 ml-3">
+          <div class="card " style="height: 7rem;">
+            <div class="card-body">
+                <div class="form-group ">
+                    <label for="photo">Photo URL :</label>
+                    <input type="text" class="form-control mt-3" name="photo">
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-6 mt-3 ml-3">
+          <div class="card " style="height: 7rem;">
+            <div class="card-body">
+
+                <div class="form-group  " >
+                    <Label>Category:</Label>    
+                    <input type="text" list="category" class="mt-3 form-control" name="category">
+                    <datalist id="category">
+                        {% for cat in cato %}
+                        <option value="{{ cat.category }}">{{ cat.category }}</option>
+            
+                        {% endfor %}
+                    </datalist>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-6 mt-3 ml-3">
+            <div class="card" style="height: 11rem; overflow: hidden;">
+              <div class="card-body">
+                  <div class="form-group ">
+                      <label for="description">Description: </label>
+                      <textarea type="text"  style="height: 6rem; resize: none;"  maxlength="1000" class="form-control mt-3" name="description"></textarea>
+                  </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    
+   
+    
+    <button type="submit" class="btn btn-primary mt-3 mb-3" style="float: right;">Add Listing</button>
+</form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+
+
+<div class="row">
+
+
+    <div class="  col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
+        <div class="w-100 text-center" style="height: 25rem; width: 100%; max-width: 100vw; ">
+            <img src="{{ Listing.photo }}" alt="image" style="max-height: 100%;">
+        </div>
+
+
+
+    </div>
+
+    <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 text-left p-5">
+        <p style="width: 50%;">{{Listing.date}}</p>
+
+
+        <h1>{{Listing.name}} </h1><br>
+        Description: <h5>{{Listing.description}}</h5> <br>
+
+        <h2>${{Listing.price}}</h2>
+
+        <h6>Owner: {{Listing.owner}}</h6>
+
+        <h6>Highest Bidder:  {{Listing.highest_bidder}}</h6>
+
+
+
+
+
+
+
+
+
+
+
+
+        <form action="{% url 'addNewBid' id=Listing.id %}" method="post">
+            {% csrf_token %}
+            <div class="form-group row">
+
+                <label style="font-size: larger" class="col-sm-4  col-form-label" for="bid">Place a Bid: </label>
+                <div class="col-sm-8">
+                    <input class="form-control " type="number" name="bid" value="{{Listing.price}}"
+                        min="{{Listing.price}}">
+                </div>
+            </div>
+
+        </form>
+
+
+        {% if user in Listing.watchlist.all %}
+        <a href="{% url 'removelist' id=Listing.id %}"><button class="btn btn-warning mt-2" >Remove Watchlist</button></a>
+        {% else %}
+        <a href="{% url 'watchlist' id=Listing.id %}"><button class="btn btn-success mt-2">Watchlist</button></a>
+
+        {% endif %}
+        {% if Listing.owner == user %}
+        <a href="{% url 'closebid' id=Listing.id %}"><button class="btn btn-danger mt-2">Remove</button> </a>
+        {% endif %}
+        <br>
+
+        <div class="card mt-4" style="width: 100%;">
+            <div class="card-body">
+                <h3 class="card-title">Comments</h3>
+                <h6 class="card-subtitle mb-2 text-muted">Add comment</h6>
+                <form action="{% url 'comment' id=Listing.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="form-control" type="text" name="comment">
+                </form>
+
+                {% for comment in comments %}
+
+                <div class="card mt-3" style="width: 100%;">
+                    <div class="card-body">
+
+                        <h6 class="card-subtitle mb-2 text-muted">{{comment.User}}</h6>
+                        <p class="card-text">{{comment.Comment}}</p>
+
+                    </div>
+                </div>
+                <p class="card-text"></p>
+                {% endfor %}
+            </div>
+        </div>
+
+
+       
+
+    </div>
+
+</div>
+<script>
+    var m = "{{message}}"
+
+    if (m == "Place a higher bid") {
+        alert('{{ message }}');
+    }
+
+</script>
+
+{% endblock %}
