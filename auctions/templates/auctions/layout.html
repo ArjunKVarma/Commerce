@@ -9,18 +9,25 @@
         <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
         <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
     </head>
-    <body style="padding: 0;">
+    <body style="padding: 0; background: #f9f9f9;">
         <style>
-            a{
+            li{
                 text-decoration: none;
+                color: #05386B !important;
+                font-family: cursive;
             }
+            .card{
+                border: 0;
+            }
+
+        
         </style>
 
 
 
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light p-3" >
-            <a class="navbar-brand" href="#"><h2 style="margin-left: 10px;">Auctions</h2></a>
+        <nav class="navbar navbar-expand-lg mb-4   p-3" style="background: #ffefd3 !important; color: #05386B ; ">
+            <a class="navbar-brand" href="#"><h2 style="margin-left: 10px; color:#05386B ;">Auctions</h2></a>
             {% if user.is_authenticated %}
                 <p >Signed in as <strong> &nbsp{{ user.username }}</strong></p>
             {% else %}
@@ -30,32 +37,32 @@
               <span class="navbar-toggler-icon"></span>
             </button>
           
-            <div class="collapse navbar-collapse" id="navbarSupportedContent" toggle="collapse" data-target=".navbar-collapse">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
-                </li>
+                
+                    <a class="nav-link" href="{% url 'index' %}"><li class="nav-item">Active Listings</li></a>
+                
                 {% if user.is_authenticated %}
                  
-                    <li class="nav-item ">
-                        <a class="nav-link " href="{% url 'addListing' %}">Create Listing</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link " href="{% url 'watchpage' %}">WatchList</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link " href="{% url 'categories' %}">Categories</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="btn-primary btn  " href="{% url 'logout' %}">Log Out</a>
-                    </li>
+                    
+                        <a class="nav-link " href="{% url 'addListing' %}"><li class="nav-item ">Create Listing</li></a>
+                    
+                    
+                        <a class="nav-link " href="{% url 'watchpage' %}"><li class="nav-item ">WatchList</li></a>
+                    
+                    
+                        <a class="nav-link " href="{% url 'categories' %}"><li class="nav-item ">Categories</li></a>
+                    
+                    
+                        <a class="btn-primary btn  " style="color: white !important;" href="{% url 'logout' %}"><li class="nav-item ">Log Out</li></a>
+                    
                 {% else %}
-                    <li class="nav-item ">
-                        <a class="nav-link " href="{% url 'login' %}">Log In</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="btn-primary btn " href="{% url 'register' %}">Register</a>
-                    </li>
+                    
+                        <a class="nav-link " style="color: white !important;" href="{% url 'login' %}"><li class="nav-item ">Log In</li></a>
+                    
+                    
+                        <a class="btn-primary btn " href="{% url 'register' %}"><li class="nav-item ">Register</li></a>
+                    
                 {% endif %}
               </ul>
               
@@ -75,7 +82,7 @@
         <ul class="nav">
 
         </ul>
-        <hr>
+        
         <div style="padding: 10px;">
             {% block body %}
             {% endblock %}</div>
